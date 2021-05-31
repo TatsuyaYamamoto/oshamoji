@@ -60,19 +60,16 @@ describe("OshalizableChar", () => {
       ${"h"} | ${"𝐡"} | ${"ℎ"} | ${"𝒉"}
       ${"z"} | ${"𝐳"} | ${"𝑧"} | ${"𝒛"}
     `("mutual conversion ($normal)", ({ normal, bold, italic, boldItalic }) => {
-      test(`bold`, () => {
-        expect(toBold(normal).codePointAt(0)).toBe(bold.codePointAt(0));
-        expect(toNormal(bold).codePointAt(0)).toBe(normal.codePointAt(0));
-      });
-      test(`italic`, () => {
-        expect(toItalic(normal).codePointAt(0)).toBe(italic.codePointAt(0));
-        expect(toNormal(italic).codePointAt(0)).toBe(normal.codePointAt(0));
-      });
-      test(`boldItalic`, () => {
-        expect(toBoldItalic(normal).codePointAt(0)).toBe(
-          boldItalic.codePointAt(0)
-        );
-        expect(toNormal(boldItalic).codePointAt(0)).toBe(normal.codePointAt(0));
+      test.each`
+        test                        | actualValue             | expectValue
+        ${"normal => bold"}         | ${toBold(normal)}       | ${bold}
+        ${"bold => normal"}         | ${toNormal(bold)}       | ${normal}
+        ${"normal => italic"}       | ${toItalic(normal)}     | ${italic}
+        ${"italic => normal"}       | ${toNormal(italic)}     | ${normal}
+        ${"normal =>  bold italic"} | ${toBoldItalic(normal)} | ${boldItalic}
+        ${"bold italic => normal"}  | ${toNormal(boldItalic)} | ${normal}
+      `("$test", ({ actualValue, expectValue }) => {
+        expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
       });
     });
   });

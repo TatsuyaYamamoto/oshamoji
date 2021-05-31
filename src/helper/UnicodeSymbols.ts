@@ -60,11 +60,11 @@ export const include = (
     return true;
   }
 
-  const reservedSymbols = unicodeSymbols.reservedSymbols?.find((reserved) => {
-    return toIntCodePoint(reserved.codePoint) === codePoint;
+  const reservedSymbol = unicodeSymbols.reservedSymbols?.find((reserved) => {
+    return toIntCodePoint(reserved.assignedCodePoint) === codePoint;
   });
 
-  return !!reservedSymbols;
+  return !!reservedSymbol;
 };
 
 export const convert = (
@@ -79,7 +79,15 @@ export const convert = (
   const targetCharCodepoint =
     toIntCodePoint(targetUnicodeSymbols.codePointRange.from) + codePointDiff;
 
-  return String.fromCodePoint(targetCharCodepoint);
+  const reservedSymbol = targetUnicodeSymbols.reservedSymbols?.find(
+    (reserved) => {
+      return toIntCodePoint(reserved.codePoint) === targetCharCodepoint;
+    }
+  );
+
+  return reservedSymbol
+    ? String.fromCodePoint(toIntCodePoint(reservedSymbol.assignedCodePoint))
+    : String.fromCodePoint(targetCharCodepoint);
 };
 
 export const toBasicLatinChar = (
@@ -87,7 +95,15 @@ export const toBasicLatinChar = (
   sourceUnicodeSymbols: UnicodeSymbols
 ): string => {
   const topCodepoint = toIntCodePoint(sourceUnicodeSymbols.codePointRange.from);
-  const codePointDiff = sourceCharCodePoint - topCodepoint;
+  const reservedSymbol = sourceUnicodeSymbols.reservedSymbols?.find(
+    (reserved) => {
+      return toIntCodePoint(reserved.assignedCodePoint) === sourceCharCodePoint;
+    }
+  );
+
+  const codePointDiff = reservedSymbol
+    ? toIntCodePoint(reservedSymbol.codePoint) - topCodepoint
+    : sourceCharCodePoint - topCodepoint;
 
   const basicLatinTopCodepoint = getBasicLatinTopCodepoint(
     sourceUnicodeSymbols.characterType,
