@@ -28,7 +28,7 @@ const toSansSerif = (source: string, variant: Variant) => {
 };
 
 describe("OshalizableChar", () => {
-  describe(`Serif`, () => {
+  describe(`Latin letters Serif`, () => {
     describe.each`
       normal | bold   | italic | boldItalic
       ${"A"} | ${"𝐀"} | ${"𝐴"} | ${"𝑨"}
@@ -51,7 +51,7 @@ describe("OshalizableChar", () => {
     });
   });
 
-  describe(`Sans-serif`, () => {
+  describe(`Latin letters Sans-serif`, () => {
     describe.each`
       serif  | normal | bold   | italic | boldItalic
       ${"A"} | ${"𝖠"} | ${"𝗔"} | ${"𝘈"} | ${"𝘼"}
@@ -71,6 +71,30 @@ describe("OshalizableChar", () => {
           ${"italic => normal"}       | ${toSansSerif(italic, "normal")}     | ${normal}
           ${"normal =>  bold italic"} | ${toSansSerif(normal, "boldItalic")} | ${boldItalic}
           ${"bold italic => normal"}  | ${toSansSerif(boldItalic, "normal")} | ${normal}
+        `("$test", ({ actualValue, expectValue }) => {
+          expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
+        });
+      }
+    );
+  });
+
+  describe("Digits", () => {
+    describe.each`
+      serifNormal | serifBold | sansSerifNormal | sansSerifBold
+      ${"0"}      | ${"𝟎"}    | ${"𝟢"}          | ${"𝟬"}
+      ${"5"}      | ${"𝟓"}    | ${"𝟧"}          | ${"𝟱"}
+      ${"9"}      | ${"𝟗"}    | ${"𝟫"}          | ${"𝟵"}
+    `(
+      "mutual conversion ($serifNormal)",
+      ({ serifNormal, serifBold, sansSerifNormal, sansSerifBold }) => {
+        test.each`
+          test                                    | actualValue                           | expectValue
+          ${"serifNormal     => serifBold"}       | ${toSerif(serifNormal, "bold")}       | ${serifBold}
+          ${"serifBold       => serifNormal"}     | ${toSerif(serifBold, "normal")}       | ${serifNormal}
+          ${"serifNormal     => sansSerifNormal"} | ${toSansSerif(serifNormal, "normal")} | ${sansSerifNormal}
+          ${"sansSerifNormal => serifNormal"}     | ${toSerif(sansSerifNormal, "normal")} | ${serifNormal}
+          ${"serifNormal     =>  sansSerifBold"}  | ${toSansSerif(serifNormal, "bold")}   | ${sansSerifBold}
+          ${"sansSerifBold   => serifNormal"}     | ${toSerif(sansSerifBold, "normal")}   | ${serifNormal}
         `("$test", ({ actualValue, expectValue }) => {
           expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
         });

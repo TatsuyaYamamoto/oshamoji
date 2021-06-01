@@ -187,14 +187,39 @@ const LatinLowercaseSansSerifBoldItalicLetters: UnicodeSymbols = {
   },
 };
 
+/* 0 */
+export const SerifNormalDigits = AsciiDigits;
+
 /* 𝟎 */
-export const BoldDigits: UnicodeSymbols = {
+export const SerifBoldDigits: UnicodeSymbols = {
   typeface: "serif",
   variant: "bold",
   characterType: "digit",
   codePointRange: {
     from: "U+1D7CE",
     to: "U+1D7D7",
+  },
+};
+
+/* 𝟢 */
+export const SansSerifNormalDigits: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "normal",
+  characterType: "digit",
+  codePointRange: {
+    from: "U+1D7E2",
+    to: "U+1D7EB",
+  },
+};
+
+/* 𝟬 */
+export const SansSerifBoldDigits: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "bold",
+  characterType: "digit",
+  codePointRange: {
+    from: "U+1D7EC",
+    to: "U+1D7F5",
   },
 };
 
@@ -231,8 +256,12 @@ export const MathematicalAlphanumericStyleMap = {
   },
   digit: {
     serif: {
-      normal: AsciiDigits,
-      bold: BoldDigits,
+      normal: SerifNormalDigits,
+      bold: SerifBoldDigits,
+    },
+    sansSerif: {
+      normal: SansSerifNormalDigits,
+      bold: SansSerifBoldDigits,
     },
   },
 } as const;
