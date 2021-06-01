@@ -1,50 +1,27 @@
 import OshalizableChar from "../OshalizableChar";
+import { Variant } from "../UnicodeSymbols";
 
-const toNormal = (source: string) => {
-  const chars = OshalizableChar.from(source);
-  return chars
-    .map((char) =>
-      char.convert({
-        block: "basicLatin",
-      })
-    )
-    .join("");
-};
-
-const toBold = (source: string) => {
+const toSerif = (source: string, variant: Variant) => {
   const chars = OshalizableChar.from(source);
   return chars
     .map((char) =>
       char.convert({
         block: "mathematicalAlphanumeric",
         typeface: "serif",
-        variant: "bold",
+        variant,
       })
     )
     .join("");
 };
 
-const toItalic = (source: string) => {
+const toSansSerif = (source: string, variant: Variant) => {
   const chars = OshalizableChar.from(source);
   return chars
     .map((char) =>
       char.convert({
         block: "mathematicalAlphanumeric",
-        typeface: "serif",
-        variant: "italic",
-      })
-    )
-    .join("");
-};
-
-const toBoldItalic = (source: string) => {
-  const chars = OshalizableChar.from(source);
-  return chars
-    .map((char) =>
-      char.convert({
-        block: "mathematicalAlphanumeric",
-        typeface: "serif",
-        variant: "boldItalic",
+        typeface: "sansSerif",
+        variant,
       })
     )
     .join("");
@@ -61,48 +38,43 @@ describe("OshalizableChar", () => {
       ${"z"} | ${"𝐳"} | ${"𝑧"} | ${"𝒛"}
     `("mutual conversion ($normal)", ({ normal, bold, italic, boldItalic }) => {
       test.each`
-        test                        | actualValue             | expectValue
-        ${"normal => bold"}         | ${toBold(normal)}       | ${bold}
-        ${"bold => normal"}         | ${toNormal(bold)}       | ${normal}
-        ${"normal => italic"}       | ${toItalic(normal)}     | ${italic}
-        ${"italic => normal"}       | ${toNormal(italic)}     | ${normal}
-        ${"normal =>  bold italic"} | ${toBoldItalic(normal)} | ${boldItalic}
-        ${"bold italic => normal"}  | ${toNormal(boldItalic)} | ${normal}
+        test                        | actualValue                      | expectValue
+        ${"normal => bold"}         | ${toSerif(normal, "bold")}       | ${bold}
+        ${"bold => normal"}         | ${toSerif(bold, "normal")}       | ${normal}
+        ${"normal => italic"}       | ${toSerif(normal, "italic")}     | ${italic}
+        ${"italic => normal"}       | ${toSerif(italic, "normal")}     | ${normal}
+        ${"normal =>  bold italic"} | ${toSerif(normal, "boldItalic")} | ${boldItalic}
+        ${"bold italic => normal"}  | ${toSerif(boldItalic, "normal")} | ${normal}
       `("$test", ({ actualValue, expectValue }) => {
         expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
       });
     });
   });
 
-  describe.skip(`Sans-serif`, () => {
+  describe(`Sans-serif`, () => {
     describe.each`
-      normal | bold   | italic | boldItalic
-      ${"A"} | ${"𝐀"} | ${"𝐴"} | ${"𝑨"}
-      ${"B"} | ${""}  | ${""}  | ${""}
-      ${"C"} | ${""}  | ${""}  | ${""}
-      ${"D"} | ${""}  | ${""}  | ${""}
-      ${"E"} | ${""}  | ${""}  | ${""}
-      ${"F"} | ${""}  | ${""}  | ${""}
-      ${"G"} | ${""}  | ${""}  | ${""}
-      ${"H"} | ${""}  | ${""}  | ${""}
-      ${"I"} | ${""}  | ${""}  | ${""}
-      ${"J"} | ${""}  | ${""}  | ${""}
-      ${"K"} | ${""}  | ${""}  | ${""}
-      ${"L"} | ${""}  | ${""}  | ${""}
-      ${"M"} | ${""}  | ${""}  | ${""}
-      ${"N"} | ${""}  | ${""}  | ${""}
-      ${"O"} | ${""}  | ${""}  | ${""}
-      ${"P"} | ${""}  | ${""}  | ${""}
-      ${"Q"} | ${""}  | ${""}  | ${""}
-      ${"R"} | ${""}  | ${""}  | ${""}
-      ${"S"} | ${""}  | ${""}  | ${""}
-      ${"T"} | ${""}  | ${""}  | ${""}
-      ${"U"} | ${""}  | ${""}  | ${""}
-      ${"V"} | ${""}  | ${""}  | ${""}
-      ${"W"} | ${""}  | ${""}  | ${""}
-      ${"X"} | ${""}  | ${""}  | ${""}
-      ${"Y"} | ${""}  | ${""}  | ${""}
-      ${"Z"} | ${""}  | ${""}  | ${""}
-    `("test", ({ a, b, expected }) => {});
+      serif  | normal | bold   | italic | boldItalic
+      ${"A"} | ${"𝖠"} | ${"𝗔"} | ${"𝘈"} | ${"𝘼"}
+      ${"M"} | ${"𝖬"} | ${"𝗠"} | ${"𝘔"} | ${"𝙈"}
+      ${"Z"} | ${"𝖹"} | ${"𝗭"} | ${"𝘡"} | ${"𝙕"}
+      ${"a"} | ${"𝖺"} | ${"𝗮"} | ${"𝘢"} | ${"𝙖"}
+      ${"m"} | ${"𝗆"} | ${"𝗺"} | ${"𝘮"} | ${"𝙢"}
+      ${"z"} | ${"𝗓"} | ${"𝘇"} | ${"𝘻"} | ${"𝙯"}
+    `(
+      "mutual conversion ($serif)",
+      ({ serif, normal, bold, italic, boldItalic }) => {
+        test.each`
+          test                        | actualValue                          | expectValue
+          ${"normal => bold"}         | ${toSansSerif(normal, "bold")}       | ${bold}
+          ${"bold => normal"}         | ${toSansSerif(bold, "normal")}       | ${normal}
+          ${"normal => italic"}       | ${toSansSerif(normal, "italic")}     | ${italic}
+          ${"italic => normal"}       | ${toSansSerif(italic, "normal")}     | ${normal}
+          ${"normal =>  bold italic"} | ${toSansSerif(normal, "boldItalic")} | ${boldItalic}
+          ${"bold italic => normal"}  | ${toSansSerif(boldItalic, "normal")} | ${normal}
+        `("$test", ({ actualValue, expectValue }) => {
+          expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
+        });
+      }
+    );
   });
 });

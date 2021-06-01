@@ -45,6 +45,54 @@ const LatinUppercaseSerifBoldItalicLetters: UnicodeSymbols = {
   },
 };
 
+/* 𝖠 */
+const LatinUppercaseSansSerifNormalLetters: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "normal",
+  characterType: "latinLetter",
+  letterCase: "uppercase",
+  codePointRange: {
+    from: "U+1D5A0",
+    to: "U+1D5B9",
+  },
+};
+
+/* 𝗔 */
+const LatinUppercaseSansSerifBoldLetters: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "bold",
+  characterType: "latinLetter",
+  letterCase: "uppercase",
+  codePointRange: {
+    from: "U+1D5D4",
+    to: "U+1D5ED",
+  },
+};
+
+/* 𝘈 */
+const LatinUppercaseSansSerifItalicLetters: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "italic",
+  characterType: "latinLetter",
+  letterCase: "uppercase",
+  codePointRange: {
+    from: "U+1D608",
+    to: "U+1D621",
+  },
+};
+
+/* 𝘼 */
+const LatinUppercaseSansSerifBoldItalicLetters: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "boldItalic",
+  characterType: "latinLetter",
+  letterCase: "uppercase",
+  codePointRange: {
+    from: "U+1D63C",
+    to: "U+1D655",
+  },
+};
+
 /* a */
 const LatinLowercaseSerifNormalLetters = LowercaseLatinAlphabet;
 
@@ -91,6 +139,54 @@ const LatinLowercaseSerifBoldItalicLetters: UnicodeSymbols = {
   },
 };
 
+/* a */
+const LatinLowercaseSansSerifNormalLetters: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "normal",
+  characterType: "latinLetter",
+  letterCase: "lowercase",
+  codePointRange: {
+    from: "U+1D5BA",
+    to: "U+1D5D3",
+  },
+};
+
+/* 𝐚 */
+const LatinLowercaseSansSerifBoldLetters: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "bold",
+  characterType: "latinLetter",
+  letterCase: "lowercase",
+  codePointRange: {
+    from: "U+1D5EE",
+    to: "U+1D607",
+  },
+};
+
+/* 𝑎 */
+const LatinLowercaseSansSerifItalicLetters: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "italic",
+  characterType: "latinLetter",
+  letterCase: "lowercase",
+  codePointRange: {
+    from: "U+1D622",
+    to: "U+1D63B",
+  },
+};
+
+/* 𝒂 */
+const LatinLowercaseSansSerifBoldItalicLetters: UnicodeSymbols = {
+  typeface: "sansSerif",
+  variant: "boldItalic",
+  characterType: "latinLetter",
+  letterCase: "lowercase",
+  codePointRange: {
+    from: "U+1D656",
+    to: "U+1D66F",
+  },
+};
+
 /* 𝟎 */
 export const BoldDigits: UnicodeSymbols = {
   typeface: "serif",
@@ -111,6 +207,12 @@ export const MathematicalAlphanumericStyleMap = {
         italic: LatinUppercaseSerifItalicLetters,
         boldItalic: LatinUppercaseSerifBoldItalicLetters,
       },
+      sansSerif: {
+        normal: LatinUppercaseSansSerifNormalLetters,
+        bold: LatinUppercaseSansSerifBoldLetters,
+        italic: LatinUppercaseSansSerifItalicLetters,
+        boldItalic: LatinUppercaseSansSerifBoldItalicLetters,
+      },
     },
     lowercase: {
       serif: {
@@ -118,6 +220,12 @@ export const MathematicalAlphanumericStyleMap = {
         bold: LatinLowercaseSerifBoldLetters,
         italic: LatinLowercaseSerifItalicLetters,
         boldItalic: LatinLowercaseSerifBoldItalicLetters,
+      },
+      sansSerif: {
+        normal: LatinLowercaseSansSerifNormalLetters,
+        bold: LatinLowercaseSansSerifBoldLetters,
+        italic: LatinLowercaseSansSerifItalicLetters,
+        boldItalic: LatinLowercaseSansSerifBoldItalicLetters,
       },
     },
   },
