@@ -1,0 +1,15 @@
+.textCard {
+  width: 320px;
+  min-height: 90px;
+  overflow: visible;
+  pointer-events: auto;
+  transform-origin: 50% 50% 0;
+  border-radius: 4px;
+  color: rgb(153, 153, 153);
+  padding-left: 32px;
+  margin: 10px 0;
+  font-size: 24px;
+  font-weight: 400;
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+}

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Fonts from "../components/Fonts";
+import TextCardList from "../components/TextCardList";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Fonts />
+        <TextCardList />
       </main>
     </div>
   );

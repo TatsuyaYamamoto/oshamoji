@@ -10,6 +10,8 @@
     "build:export": "next export src"
   },
   "dependencies": {
+    "@react-spring/web": "^9.2.1",
+    "@use-gesture/react": "^10.0.0-beta.9",
     "next": "10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
