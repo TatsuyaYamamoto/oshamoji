@@ -27,6 +27,19 @@ const toSansSerif = (source: string, variant: Variant) => {
     .join("");
 };
 
+const toScript = (source: string, variant: Variant) => {
+  const chars = OshalizableChar.from(source);
+  return chars
+    .map((char) =>
+      char.convert({
+        block: "mathematicalAlphanumeric",
+        typeface: "script",
+        variant,
+      })
+    )
+    .join("");
+};
+
 describe("OshalizableChar", () => {
   describe(`Latin letters Serif`, () => {
     describe.each`
@@ -76,6 +89,35 @@ describe("OshalizableChar", () => {
         });
       }
     );
+  });
+
+  describe(`Latin letters Script`, () => {
+    describe.each`
+      serif  | normal | bold
+      ${"A"} | ${"𝒜"} | ${"𝓐"}
+      ${"B"} | ${"ℬ"} | ${"𝓑"}
+      ${"E"} | ${"ℰ"} | ${"𝓔"}
+      ${"F"} | ${"ℱ"} | ${"𝓕"}
+      ${"H"} | ${"ℋ"} | ${"𝓗"}
+      ${"I"} | ${"ℐ"} | ${"𝓘"}
+      ${"L"} | ${"ℒ"} | ${"𝓛"}
+      ${"M"} | ${"ℳ"} | ${"𝓜"}
+      ${"R"} | ${"ℛ"} | ${"𝓡"}
+      ${"Z"} | ${"𝒵"} | ${"𝓩"}
+      ${"a"} | ${"𝒶"} | ${"𝓪"}
+      ${"e"} | ${"ℯ"} | ${"𝓮"}
+      ${"g"} | ${"ℊ"} | ${"𝓰"}
+      ${"o"} | ${"ℴ"} | ${"𝓸"}
+      ${"z"} | ${"𝓏"} | ${"𝔃"}
+    `("mutual conversion ($serif)", ({ serif, normal, bold }) => {
+      test.each`
+        test                | actualValue                 | expectValue
+        ${"normal => bold"} | ${toScript(normal, "bold")} | ${bold}
+        ${"bold => normal"} | ${toScript(bold, "normal")} | ${normal}
+      `("$test", ({ actualValue, expectValue }) => {
+        expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
+      });
+    });
   });
 
   describe("Digits", () => {

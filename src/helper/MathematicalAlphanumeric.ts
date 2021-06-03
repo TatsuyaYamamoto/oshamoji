@@ -93,6 +93,40 @@ const LatinUppercaseSansSerifBoldItalicLetters: UnicodeSymbols = {
   },
 };
 
+/* 𝒜 */
+const LatinUppercaseScriptNormalLetters: UnicodeSymbols = {
+  typeface: "script",
+  variant: "normal",
+  characterType: "latinLetter",
+  letterCase: "uppercase",
+  codePointRange: {
+    from: "U+1D49C",
+    to: "U+1D4B5",
+  },
+  reservedSymbols: [
+    /* ℬ */ { codePoint: "U+1D49D", assignedCodePoint: "U+212C" },
+    /* ℰ */ { codePoint: "U+1D4A0", assignedCodePoint: "U+2130" },
+    /* ℱ */ { codePoint: "U+1D4A1", assignedCodePoint: "U+2131" },
+    /* ℋ */ { codePoint: "U+1D4A3", assignedCodePoint: "U+210B" },
+    /* ℐ */ { codePoint: "U+1D4A4", assignedCodePoint: "U+2110" },
+    /* ℒ */ { codePoint: "U+1D4A7", assignedCodePoint: "U+2112" },
+    /* ℳ */ { codePoint: "U+1D4A8", assignedCodePoint: "U+2133" },
+    /* ℛ */ { codePoint: "U+1D4AD", assignedCodePoint: "U+211B" },
+  ],
+};
+
+/* 𝓐 */
+const LatinUppercaseScriptBoldLetters: UnicodeSymbols = {
+  typeface: "script",
+  variant: "bold",
+  characterType: "latinLetter",
+  letterCase: "uppercase",
+  codePointRange: {
+    from: "U+1D4D0",
+    to: "U+1D4E9",
+  },
+};
+
 /* a */
 const LatinLowercaseSerifNormalLetters = LowercaseLatinAlphabet;
 
@@ -187,6 +221,35 @@ const LatinLowercaseSansSerifBoldItalicLetters: UnicodeSymbols = {
   },
 };
 
+/* 𝒶 */
+const LatinLowercaseScriptNormalLetters: UnicodeSymbols = {
+  typeface: "script",
+  variant: "normal",
+  characterType: "latinLetter",
+  letterCase: "lowercase",
+  codePointRange: {
+    from: "U+1D4B6",
+    to: "U+1D4CF",
+  },
+  reservedSymbols: [
+    /* ℯ */ { codePoint: "U+1D4BA", assignedCodePoint: "U+212F" },
+    /* ℊ */ { codePoint: "U+1D4BC", assignedCodePoint: "U+210A" },
+    /* ℴ */ { codePoint: "U+1D4C4", assignedCodePoint: "U+2134" },
+  ],
+};
+
+/* 𝓪 */
+const LatinLowercaseScriptBoldLetters: UnicodeSymbols = {
+  typeface: "script",
+  variant: "bold",
+  characterType: "latinLetter",
+  letterCase: "lowercase",
+  codePointRange: {
+    from: "U+1D4EA",
+    to: "U+1D503",
+  },
+};
+
 /* 0 */
 export const SerifNormalDigits = AsciiDigits;
 
@@ -238,6 +301,10 @@ export const MathematicalAlphanumericStyleMap = {
         italic: LatinUppercaseSansSerifItalicLetters,
         boldItalic: LatinUppercaseSansSerifBoldItalicLetters,
       },
+      script: {
+        normal: LatinUppercaseScriptNormalLetters,
+        bold: LatinUppercaseScriptBoldLetters,
+      },
     },
     lowercase: {
       serif: {
@@ -251,6 +318,10 @@ export const MathematicalAlphanumericStyleMap = {
         bold: LatinLowercaseSansSerifBoldLetters,
         italic: LatinLowercaseSansSerifItalicLetters,
         boldItalic: LatinLowercaseSansSerifBoldItalicLetters,
+      },
+      script: {
+        normal: LatinLowercaseScriptNormalLetters,
+        bold: LatinLowercaseScriptBoldLetters,
       },
     },
   },
