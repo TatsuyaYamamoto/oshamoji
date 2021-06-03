@@ -51,6 +51,22 @@ const TextCardList: FC = () => {
         typeface: "sansSerif",
         variant: "boldItalic",
       },
+      {
+        typeface: "script",
+        variant: "normal",
+      },
+      {
+        typeface: "script",
+        variant: "bold",
+      },
+      {
+        typeface: "fraktur",
+        variant: "normal",
+      },
+      {
+        typeface: "fraktur",
+        variant: "bold",
+      },
     ];
 
     const convertResult = convertTargetTypes.map((type) =>
