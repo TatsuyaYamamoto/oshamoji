@@ -1,6 +1,17 @@
 import OshalizableChar from "../OshalizableChar";
 import { Variant } from "../UnicodeSymbols";
 
+const toBasic = (source: string) => {
+  const chars = OshalizableChar.from(source);
+  return chars
+    .map((char) =>
+      char.convert({
+        block: "basicLatin",
+      })
+    )
+    .join("");
+};
+
 const toSerif = (source: string, variant: Variant) => {
   const chars = OshalizableChar.from(source);
   return chars
@@ -47,6 +58,32 @@ const toFraktur = (source: string, variant: Variant) => {
       char.convert({
         block: "mathematicalAlphanumeric",
         typeface: "fraktur",
+        variant,
+      })
+    )
+    .join("");
+};
+
+const toMonoSpace = (source: string, variant: Variant) => {
+  const chars = OshalizableChar.from(source);
+  return chars
+    .map((char) =>
+      char.convert({
+        block: "mathematicalAlphanumeric",
+        typeface: "monoSpace",
+        variant,
+      })
+    )
+    .join("");
+};
+
+const toDoubleStruck = (source: string, variant: Variant) => {
+  const chars = OshalizableChar.from(source);
+  return chars
+    .map((char) =>
+      char.convert({
+        block: "mathematicalAlphanumeric",
+        typeface: "doubleStruck",
         variant,
       })
     )
@@ -149,6 +186,51 @@ describe("OshalizableChar", () => {
         test                | actualValue                  | expectValue
         ${"normal => bold"} | ${toFraktur(normal, "bold")} | ${bold}
         ${"bold => normal"} | ${toFraktur(bold, "normal")} | ${normal}
+      `("$test", ({ actualValue, expectValue }) => {
+        expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
+      });
+    });
+  });
+
+  describe(`Latin letters Mono-space`, () => {
+    describe.each`
+      serif  | normal
+      ${"A"} | ${"𝙰"}
+      ${"M"} | ${"𝙼"}
+      ${"Z"} | ${"𝚉"}
+      ${"a"} | ${"𝚊"}
+      ${"m"} | ${"𝚖"}
+      ${"z"} | ${"𝚣"}
+    `("mutual conversion ($serif)", ({ serif, normal }) => {
+      test.each`
+        test                 | actualValue                     | expectValue
+        ${"serif => normal"} | ${toMonoSpace(serif, "normal")} | ${normal}
+        ${"normal => serif"} | ${toBasic(normal)}              | ${serif}
+      `("$test", ({ actualValue, expectValue }) => {
+        expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
+      });
+    });
+  });
+
+  describe(`Latin letters Double-struck`, () => {
+    describe.each`
+      serif  | bold
+      ${"A"} | ${"𝔸"}
+      ${"C"} | ${"ℂ"}
+      ${"H"} | ${"ℍ"}
+      ${"N"} | ${"ℕ"}
+      ${"P"} | ${"ℙ"}
+      ${"Q"} | ${"ℚ"}
+      ${"R"} | ${"ℝ"}
+      ${"Z"} | ${"ℤ"}
+      ${"a"} | ${"𝕒"}
+      ${"m"} | ${"𝕞"}
+      ${"z"} | ${"𝕫"}
+    `("mutual conversion ($serif)", ({ serif, bold }) => {
+      test.each`
+        test               | actualValue                      | expectValue
+        ${"serif => bold"} | ${toDoubleStruck(serif, "bold")} | ${bold}
+        ${"bold => serif"} | ${toBasic(bold)}                 | ${serif}
       `("$test", ({ actualValue, expectValue }) => {
         expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
       });
