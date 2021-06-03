@@ -67,6 +67,14 @@ const TextCardList: FC = () => {
         typeface: "fraktur",
         variant: "bold",
       },
+      {
+        typeface: "monoSpace",
+        variant: "normal",
+      },
+      {
+        typeface: "doubleStruck",
+        variant: "bold",
+      },
     ];
 
     const convertResult = convertTargetTypes.map((type) =>
