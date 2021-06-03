@@ -127,6 +127,37 @@ const LatinUppercaseScriptBoldLetters: UnicodeSymbols = {
   },
 };
 
+/* 𝔄 */
+const LatinUppercaseFrakturNormalLetters: UnicodeSymbols = {
+  typeface: "fraktur",
+  variant: "normal",
+  characterType: "latinLetter",
+  letterCase: "uppercase",
+  codePointRange: {
+    from: "U+1D504",
+    to: "U+1D51D",
+  },
+  reservedSymbols: [
+    { codePoint: "U+1D506", assignedCodePoint: "U+212D" }, // ℭ black-letter capital c
+    { codePoint: "U+1D50B", assignedCodePoint: "U+210C" }, // ℌ black-letter capital h
+    { codePoint: "U+1D50C", assignedCodePoint: "U+2111" }, // ℑ black-letter capital i
+    { codePoint: "U+1D515", assignedCodePoint: "U+211C" }, // ℜ black-letter capital r
+    { codePoint: "U+1D51D", assignedCodePoint: "U+2128" }, // ℨ black-letter capital z
+  ],
+};
+
+/* 𝕬 */
+const LatinUppercaseFrakturBoldLetters: UnicodeSymbols = {
+  typeface: "fraktur",
+  variant: "bold",
+  characterType: "latinLetter",
+  letterCase: "uppercase",
+  codePointRange: {
+    from: "U+1D56C",
+    to: "U+1D585",
+  },
+};
+
 /* a */
 const LatinLowercaseSerifNormalLetters = LowercaseLatinAlphabet;
 
@@ -250,6 +281,37 @@ const LatinLowercaseScriptBoldLetters: UnicodeSymbols = {
   },
 };
 
+/* 𝒶 */
+const LatinLowercaseFrakturNormalLetters: UnicodeSymbols = {
+  typeface: "fraktur",
+  variant: "normal",
+  characterType: "latinLetter",
+  letterCase: "lowercase",
+  codePointRange: {
+    from: "U+1D51E",
+    to: "U+1D537",
+  },
+  reservedSymbols: [
+    /*  */ { codePoint: "U+", assignedCodePoint: "U+" },
+    /*  */ { codePoint: "U+", assignedCodePoint: "U+" },
+    /*  */ { codePoint: "U+", assignedCodePoint: "U+" },
+    /*  */ { codePoint: "U+", assignedCodePoint: "U+" },
+    /*  */ { codePoint: "U+", assignedCodePoint: "U+" },
+  ],
+};
+
+/* 𝓪 */
+const LatinLowercaseFrakturBoldLetters: UnicodeSymbols = {
+  typeface: "fraktur",
+  variant: "bold",
+  characterType: "latinLetter",
+  letterCase: "lowercase",
+  codePointRange: {
+    from: "U+1D586",
+    to: "U+1D59F",
+  },
+};
+
 /* 0 */
 export const SerifNormalDigits = AsciiDigits;
 
@@ -305,6 +367,10 @@ export const MathematicalAlphanumericStyleMap = {
         normal: LatinUppercaseScriptNormalLetters,
         bold: LatinUppercaseScriptBoldLetters,
       },
+      fraktur: {
+        normal: LatinUppercaseFrakturNormalLetters,
+        bold: LatinUppercaseFrakturBoldLetters,
+      },
     },
     lowercase: {
       serif: {
@@ -322,6 +388,10 @@ export const MathematicalAlphanumericStyleMap = {
       script: {
         normal: LatinLowercaseScriptNormalLetters,
         bold: LatinLowercaseScriptBoldLetters,
+      },
+      fraktur: {
+        normal: LatinLowercaseFrakturNormalLetters,
+        bold: LatinLowercaseFrakturBoldLetters,
       },
     },
   },

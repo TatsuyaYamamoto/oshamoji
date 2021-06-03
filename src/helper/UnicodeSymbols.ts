@@ -4,7 +4,7 @@ import {
   UppercaseLatinAlphabet,
 } from "./BasicLatin";
 
-export type Typeface = "serif" | "sansSerif" | "script";
+export type Typeface = "serif" | "sansSerif" | "script" | "fraktur";
 export type Variant = "normal" | "bold" | "italic" | "boldItalic";
 export type CharacterType = "digit" | "latinLetter";
 export type LetterCase = "uppercase" | "lowercase";

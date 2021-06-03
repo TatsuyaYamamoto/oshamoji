@@ -40,6 +40,19 @@ const toScript = (source: string, variant: Variant) => {
     .join("");
 };
 
+const toFraktur = (source: string, variant: Variant) => {
+  const chars = OshalizableChar.from(source);
+  return chars
+    .map((char) =>
+      char.convert({
+        block: "mathematicalAlphanumeric",
+        typeface: "fraktur",
+        variant,
+      })
+    )
+    .join("");
+};
+
 describe("OshalizableChar", () => {
   describe(`Latin letters Serif`, () => {
     describe.each`
@@ -114,6 +127,28 @@ describe("OshalizableChar", () => {
         test                | actualValue                 | expectValue
         ${"normal => bold"} | ${toScript(normal, "bold")} | ${bold}
         ${"bold => normal"} | ${toScript(bold, "normal")} | ${normal}
+      `("$test", ({ actualValue, expectValue }) => {
+        expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
+      });
+    });
+  });
+
+  describe(`Latin letters Fraktur`, () => {
+    describe.each`
+      serif  | normal | bold
+      ${"A"} | ${"𝔄"} | ${"𝕬"}
+      ${"C"} | ${"ℭ"} | ${"𝕮"}
+      ${"H"} | ${"ℌ"} | ${"𝕳"}
+      ${"I"} | ${"ℑ"} | ${"𝕴"}
+      ${"R"} | ${"ℜ"} | ${"𝕽"}
+      ${"Z"} | ${"ℨ"} | ${"𝖅"}
+      ${"a"} | ${"𝔞"} | ${"𝖆"}
+      ${"z"} | ${"𝔷"} | ${"𝖟"}
+    `("mutual conversion ($serif)", ({ serif, normal, bold }) => {
+      test.each`
+        test                | actualValue                  | expectValue
+        ${"normal => bold"} | ${toFraktur(normal, "bold")} | ${bold}
+        ${"bold => normal"} | ${toFraktur(bold, "normal")} | ${normal}
       `("$test", ({ actualValue, expectValue }) => {
         expect(actualValue.codePointAt(0)).toBe(expectValue.codePointAt(0));
       });
