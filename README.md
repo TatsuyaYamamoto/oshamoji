@@ -1,3 +1,5 @@
+move to https://github.com/TatsuyaYamamoto/app.t28.dev/tree/main/apps/oshamoji
+
 ##
 
 ## Characters
